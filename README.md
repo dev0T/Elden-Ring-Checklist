@@ -1,27 +1,36 @@
-# Client
+# Elden Ring Legendaries Checklist
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.1.
+This app has been created using Angular.
+The front end has been bootstrapped by using the Angular CLI.
+There's also authentication using JWT, but the authGuard has been commented out for the demo.
 
-## Development server
+## How to run the app locally
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Angular app
 
-## Code scaffolding
+To run the angular application which will have all our user interface, navigate to the client folder.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+$ cd client
+```
 
-## Build
+Install all the necessary dependencies with npm:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```
+$ npm install
+```
 
-## Running unit tests
+You can then serve the front end application by using the following command:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
+$ ng serve
+```
 
-## Running end-to-end tests
+You can then proceed to use the application by navigating to `http://localhost:4200/`.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## References
 
-## Further help
+This project has been inspired by this project [this project](https://smcnabb.github.io/dark-souls-cheat-sheet/).
+Their implementation relies on HTML, JS, JQuery and Bootstrap v2.1.1. Code from 12 years ago!
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+All styling uses Bootstrap v5.0 along with a few components from [ng-bootstrap](https://ng-bootstrap.github.io/#/home).
