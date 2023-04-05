@@ -1,0 +1,186 @@
+<h1 class="fw-bold mb-0 mt-4 p-3">Elden Ring Legendaries Checklist</h1>
+<div class="navbar navbar-expand-lg navbar-light">
+  <div class="container-fluid">
+    <div class="navbar-inner">
+      <ul
+        ngbNav
+        #nav="ngbNav"
+        [(activeId)]="active"
+        class="nav-tabs justify-content-center"
+      >
+        <li [ngbNavItem]="1">
+          <a ngbNavLink>Armaments</a>
+          <ng-template ngbNavContent>
+            <form
+              class="d-flex flex-column"
+              [formGroup]="getFormGroup('armaments')"
+            >
+              <label
+                *ngFor="let item of getListType('armaments'); let i = index"
+              >
+                <input type="checkbox" [formControlName]="item" class="me-2" />
+                <a
+                  href="{{ items['armaments'][i].link }}"
+                  class="text-decoration-none"
+                >
+                  {{ items["armaments"][i].name }}
+                </a>
+                - {{ items["armaments"][i].description }}
+              </label>
+            </form>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="2">
+          <a ngbNavLink>Ashen Remains</a>
+          <ng-template ngbNavContent>
+            <form class="row" [formGroup]="getFormGroup('ashes')">
+              <label *ngFor="let item of getListType('ashes'); let i = index">
+                <input type="checkbox" [formControlName]="item" class="me-2" />
+                <a
+                  href="{{ items['ashes'][i].link }}"
+                  class="text-decoration-none"
+                >
+                  {{ items["ashes"][i].name }}
+                </a>
+                - {{ items["ashes"][i].description }}
+              </label>
+            </form>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="3">
+          <a ngbNavLink>Sorceries & Incantations</a>
+          <ng-template ngbNavContent>
+            <form class="row" [formGroup]="getFormGroup('sorceries')">
+              <label
+                *ngFor="let item of getListType('sorceries'); let i = index"
+              >
+                <input type="checkbox" [formControlName]="item" class="me-2" />
+                <a
+                  href="{{ items['sorceries'][i].link }}"
+                  class="text-decoration-none"
+                >
+                  {{ items["sorceries"][i].name }}
+                </a>
+                - {{ items["sorceries"][i].description }}
+              </label>
+            </form>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="4">
+          <a ngbNavLink>Talismans</a>
+          <ng-template ngbNavContent>
+            <div class="container-fluid">
+              <form class="row" [formGroup]="getFormGroup('talismans')">
+                <label
+                  *ngFor="let item of getListType('talismans'); let i = index"
+                >
+                  <input
+                    type="checkbox"
+                    [formControlName]="item"
+                    class="me-2"
+                  />
+                  <a
+                    href="{{ items['talismans'][i].link }}"
+                    class="text-decoration-none"
+                  >
+                    {{ items["talismans"][i].name }}
+                  </a>
+                  - {{ items["talismans"][i].description }}
+                </label>
+              </form>
+            </div>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="5">
+          <a ngbNavLink>About</a>
+          <ng-template ngbNavContent
+            >You can check the app repository on GitHub
+            <a
+              href="https://github.com/dev0T/elden-ring-cheat-sheet"
+              class="text-decoration-none"
+              >here.</a
+            ></ng-template
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="p-2">
+      <div class="input-group">
+        <select
+          id="profiles"
+          class="form-select rounded-start"
+          (change)="setSelectedProfile($event)"
+        >
+          <option
+            *ngFor="let profile of userProfiles; let i = index"
+            [value]="profile.name"
+          >
+            {{ profile.name }}
+          </option>
+        </select>
+        <button
+          class="btn btn-outline-primary"
+          type="button"
+          id="profileAdd"
+          (click)="open(content)"
+        >
+          New Profile
+        </button>
+        <button
+          class="btn btn-outline-danger"
+          type="button"
+          id="profileDelete"
+          (click)="deleteCurrentProfile()"
+          [disabled]="!canDeleteProfile()"
+        >
+          Delete
+        </button>
+        <button
+          class="btn btn-outline-warning"
+          type="button"
+          id="logout"
+          (click)="logOut()"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [ngbNavOutlet]="nav" class="p-3"></div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="modalForm">
+      <div class="mb-3">
+        <label for="profileName">Profile Name</label>
+        <div class="input-group">
+          <input
+            id="profileName"
+            class="form-control"
+            placeholder="Profile Name"
+            formControlName="profileName"
+            name="profileName"
+            type="text"
+            required
+          />
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="onAddProfile()">
+      Save
+    </button>
+  </div>
+</ng-template>
